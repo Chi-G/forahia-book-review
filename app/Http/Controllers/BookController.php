@@ -14,6 +14,7 @@ class BookController extends Controller
     {
         $title = $request->input('title');
         $filter = $request->input('filter', '');
+        $page = $request->input('page', 1);
 
         $books = Book::when(
             $title,
@@ -28,11 +29,11 @@ class BookController extends Controller
             default => $books->latest()->withAvgRating()->withReviewsCount()
         };
 
-        $cacheKey = 'books:' . $filter . ':' . $title;
+        $cacheKey = 'books:' . $filter . ':' . $title . ':page' . $page;
         $books = cache()->remember(
             $cacheKey,
             3600,
-            fn() => $books->get()
+            fn() => $books->paginate(10)
         );
 
         return view('books.index', ['books' => $books]);
@@ -48,13 +49,15 @@ class BookController extends Controller
         $book = cache()->remember(
             $cacheKey,
             3600,
-            fn() =>
-            Book::with([
-                'reviews' => fn($query) => $query->latest()
-            ])->withAvgRating()->withReviewsCount()->findOrFail($id)
+            fn() => Book::withAvgRating()->withReviewsCount()->findOrFail($id)
         );
 
-        return view('books.show', ['book' => $book]);
+        $reviews = $book->reviews()->latest()->paginate(5);
+
+        return view('books.show', [
+            'book' => $book,
+            'reviews' => $reviews
+        ]);
     }
 
     public function destroy(Book $book, Request $request)
@@ -62,7 +65,8 @@ class BookController extends Controller
         try {
             $filter = $request->input('filter', '');
             $title = $request->input('title', '');
-            $cacheKey = 'books:' . $filter . ':' . $title;
+            $page = $request->input('page', 1);
+            $cacheKey = 'books:' . $filter . ':' . $title . ':page' . $page;
 
             cache()->forget('book:' . $book->id);
             cache()->forget($cacheKey);

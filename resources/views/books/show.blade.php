@@ -2,7 +2,6 @@
 
 @section('content')
   <div class="mb-4">
-
     <!-- Back button -->
     <a href="{{ route('books.index') }}" class="btn mb-4">Home</a> |
     <a href="{{ url()->previous() }}" class="btn mb-4">Back</a>
@@ -31,7 +30,7 @@
   <div>
     <h2 class="mb-4 text-xl font-semibold">Reviews</h2>
     <ul>
-      @forelse ($book->reviews as $review)
+      @forelse ($reviews as $review)
         <li class="book-item mb-4">
           <div>
             <div class="mb-2 flex items-center justify-between">
@@ -59,6 +58,11 @@
         </li>
       @endforelse
     </ul>
+
+    <!-- Pagination Links for Reviews -->
+    <div class="pagination mt-4">
+        {{ $reviews->links('vendor.pagination.custom') }}
+    </div>
   </div>
 
   <script>

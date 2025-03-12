@@ -67,6 +67,11 @@
     @endforelse
   </ul>
 
+  <!-- Pagination Links -->
+  <div class="pagination mt-4">
+    {{ $books->links('vendor.pagination.custom') }}
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteForms = document.querySelectorAll('.delete-book-form');

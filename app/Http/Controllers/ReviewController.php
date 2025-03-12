@@ -25,9 +25,10 @@ class ReviewController extends Controller
         return redirect()->route('books.show', $book);
     }
 
-    public function destroy(Book $book, Review $review)
+    public function destroy(Book $book, Review $review, Request $request)
     {
         try {
+            $page = $request->input('page', 1);
             $review->delete();
             return redirect()->route('books.show', $book)->with('success', 'Review deleted successfully.');
         } catch (\Exception $e) {
