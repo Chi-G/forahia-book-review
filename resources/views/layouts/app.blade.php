@@ -17,7 +17,7 @@
     }
 
     .filter-container {
-      @apply mb-4 flex space-x-2 rounded-md bg-slate-100 p-2;
+      @apply mb-4 flex space-x-2 rounded-md bg-slate-300 p-2;
     }
 
     .filter-item {
@@ -59,6 +59,15 @@
     .reset-link {
       @apply text-slate-500 underline;
     }
+
+    /* Dark mode background and text color */
+    body {
+      @apply bg-gray-900 text-white;
+    }
+
+    .container {
+      @apply bg-gray-800;
+    }
   </style>
   {{-- blade-formatter-enable --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -67,8 +76,9 @@
 <body class="container mx-auto mt-10 mb-10 max-w-3xl">
   @yield('content')
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         @if(session('success'))
             toastr.success("{{ session('success') }}");
