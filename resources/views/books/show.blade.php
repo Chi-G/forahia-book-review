@@ -16,10 +16,10 @@
     <div class="book-info">
       <div class="book-author mb-4 text-lg font-semibold">By {{ $book->author }}</div>
       <div class="book-rating flex items-center">
-        <div class="mr-2 text-sm font-medium text-slate-700">
+        <div class="mr-2 text-sm font-medium text-red-400">
           <x-star-rating :rating="$book->reviews_avg_rating" />
         </div>
-        <span class="book-review-count text-sm text-gray-500">
+        <span class="book-review-count text-sm text-gray-100">
           {{ $book->reviews_count }} Total {{ Str::plural('review', $book->reviews_count) }}
         </span>
       </div>
@@ -27,8 +27,9 @@
   </div>
 
   <div class="mb-4">
-    <a href="{{ route('books.reviews.create', $book) }}" class="reset-link">
-      Add a review!</a>
+    <a href="{{ route('books.reviews.create', $book) }}" class="bg-green-500 text-white rounded-md px-4 py-2 font-medium shadow-sm hover:bg-green-600 inline-block">
+      Add a review!
+    </a>
   </div>
 
   <div>
