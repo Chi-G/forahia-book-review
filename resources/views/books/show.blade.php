@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl">{{ $book->title }}</h1>
+    <img src="{{ asset('images/forahia-logo.png') }}" alt="Forahia Book Review Logo" class="logo">
+  </div>
+
   <div class="mb-4">
     <!-- Back button -->
     <a href="{{ route('books.index') }}" class="btn mb-4">Home</a> |
     <a href="{{ url()->previous() }}" class="btn mb-4">Back</a>
     <hr class="my-4">
-
-    <h1 class="mb-2 text-2xl">{{ $book->title }}</h1>
 
     <div class="book-info">
       <div class="book-author mb-4 text-lg font-semibold">By {{ $book->author }}</div>

@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1 class="mb-10 text-2xl">Forahia Books Review</h1>
+
+  <div class="flex justify-between items-center mb-10">
+    <h1 class="text-2xl">Forahia Books Review</h1>
+    <img src="{{ asset('images/forahia-logo.png') }}" alt="Forahia Book Review Logo" class="logo">
+  </div>
 
   <form method="GET" action="{{ route('books.index') }}" class="mb-4 flex items-center space-x-2">
     <input type="text" name="title" placeholder="Search by title"

@@ -68,12 +68,15 @@
     .container {
       @apply bg-gray-800;
     }
+
+    .logo { @apply h-12 w-auto; }
   </style>
   {{-- blade-formatter-enable --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="container mx-auto mt-10 mb-10 max-w-3xl">
+
   @yield('content')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
